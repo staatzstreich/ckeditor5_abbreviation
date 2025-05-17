@@ -1,0 +1,22 @@
+{
+	"name": "mista/ckeditor5-abbreviation",
+	"type": "typo3-cms-extension",
+	"description": "Add Abbreviations information through the ckeditor",
+	"authors": [
+		{
+			"name": "Michael Staatz",
+			"role": "Developer"
+		}
+	],
+	"license": [
+		"GPL-2.0-or-later"
+	],
+	"require": {
+		"typo3/cms-rte-ckeditor": "^13.4"
+	},
+	"extra": {
+		"typo3/cms": {
+			"extension-key": "ckeditor5_abbreviation"
+		}
+	}
+}

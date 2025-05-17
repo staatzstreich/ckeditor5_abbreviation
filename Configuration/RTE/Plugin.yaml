@@ -1,0 +1,12 @@
+editor:
+  config:
+    importModules:
+      - '@mista/ckeditor5_abbreviation/abbreviation.js'
+    htmlSupport:
+      allow:
+        - { name: 'abbr', attributes: true, classes: true, styles: true }
+    contentsCss:
+      - "EXT:ckeditor5_abbreviation/Resources/Public/Css/Abbr.css"
+    toolbar:
+      item:
+        - abbreviation
