@@ -8,7 +8,7 @@ import AbbreviationEditing from './abbreviationediting.js';
 import AbbreviationUI from './abbreviationui.js';
 
 export default class Abbreviation extends Plugin {
-	static get requires() {
-		return [ AbbreviationEditing, AbbreviationUI ];
-	}
+  static get requires() {
+    return [AbbreviationEditing, AbbreviationUI];
+  }
 }

@@ -6,7 +6,7 @@ editor:
       allow:
         - { name: 'abbr', attributes: true, classes: true, styles: true }
     contentsCss:
-      - "EXT:ckeditor5_abbreviation/Resources/Public/Css/Abbr.css"
+      - 'EXT:ckeditor5_abbreviation/Resources/Public/Css/Abbr.css'
     toolbar:
       item:
         - abbreviation

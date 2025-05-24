@@ -7,54 +7,56 @@ import { Plugin } from '@ckeditor/ckeditor5-core';
 import AbbreviationCommand from './abbreviationcommand.js';
 
 export default class AbbreviationEditing extends Plugin {
-	init() {
-		this._defineSchema();
-		this._defineConverters();
+  init() {
+    this._defineSchema();
+    this._defineConverters();
 
-		this.editor.commands.add(
-			'addAbbreviation', new AbbreviationCommand( this.editor )
-		);
-	}
-	_defineSchema() {
-		const schema = this.editor.model.schema;
+    this.editor.commands.add(
+      'addAbbreviation', new AbbreviationCommand(this.editor)
+    );
+  }
 
-		// Extend the text node's schema to accept the abbreviation attribute.
-		schema.extend( '$text', {
-			allowAttributes: [ 'abbreviation' ]
-		} );
-	}
-	_defineConverters() {
-		const conversion = this.editor.conversion;
+  _defineSchema() {
+    const schema = this.editor.model.schema;
 
-		// Conversion from a model attribute to a view element
-		conversion.for( 'downcast' ).attributeToElement( {
-			model: 'abbreviation',
+    // Extend the text node's schema to accept the abbreviation attribute.
+    schema.extend('$text', {
+      allowAttributes: ['abbreviation']
+    });
+  }
 
-			// Callback function provides access to the model attribute value
-			// and the DowncastWriter
-			view: ( modelAttributeValue, conversionApi ) => {
-				const { writer } = conversionApi;
-				return writer.createAttributeElement( 'abbr', {
-					title: modelAttributeValue
-				} );
-			}
-		} );
+  _defineConverters() {
+    const conversion = this.editor.conversion;
 
-		// Conversion from a view element to a model attribute
-		conversion.for( 'upcast' ).elementToAttribute( {
-			view: {
-				name: 'abbr',
-				attributes: [ 'title' ]
-			},
-			model: {
-				key: 'abbreviation',
+    // Conversion from a model attribute to a view element
+    conversion.for('downcast').attributeToElement({
+      model: 'abbreviation',
 
-				// Callback function provides access to the view element
-				value: viewElement => {
-					const title = viewElement.getAttribute( 'title' );
-					return title;
-				}
-			}
-		} );
-	}
+      // Callback function provides access to the model attribute value
+      // and the DowncastWriter
+      view: (modelAttributeValue, conversionApi) => {
+        const {writer} = conversionApi;
+        return writer.createAttributeElement('abbr', {
+          title: modelAttributeValue
+        });
+      }
+    });
+
+    // Conversion from a view element to a model attribute
+    conversion.for('upcast').elementToAttribute({
+      view: {
+        name: 'abbr',
+        attributes: ['title']
+      },
+      model: {
+        key: 'abbreviation',
+
+        // Callback function provides access to the view element
+        value: viewElement => {
+          const title = viewElement.getAttribute('title');
+          return title;
+        }
+      }
+    });
+  }
 }
