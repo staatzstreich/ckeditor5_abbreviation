@@ -34,6 +34,11 @@ editor:
         - abbreviation
 ```
 
+3. Load the CSS - File
+
+```text
+page.includeCSS.abbreviation-tooltip = EXT:ckeditor5_abbreviation/Resources/Public/Css/AbbreviationTooltip.css
+```
 
 ## Credits
 

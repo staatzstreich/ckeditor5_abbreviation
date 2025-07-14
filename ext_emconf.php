@@ -1,7 +1,7 @@
 <?php
 $EM_CONF[$_EXTKEY] = [
     'title' => 'CKEditor5 Plugin for abbr tag',
-    'description' => 'Add Abbreviations information through the ckeditor',
+    'description' => 'Add abbreviations information through the ckeditor',
     'category' => 'be',
     'state' => 'stable',
     'clearCacheOnLoad' => true,

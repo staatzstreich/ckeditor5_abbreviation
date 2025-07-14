@@ -1,0 +1,68 @@
+/* basic styling for abbreviations */
+abbr[data-tooltip] {
+    position: relative;
+    cursor: help;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 2px;
+    color: #0066cc;
+    border-bottom: none; /* remove standard-Browser-tooltip */
+}
+
+/* tooltip-container */
+abbr[data-tooltip]::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+    margin-bottom: 5px;
+}
+
+/* tooltip-arrow */
+abbr[data-tooltip]::after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #333;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+/* show tooltip on hover */
+abbr[data-tooltip]:hover::before,
+abbr[data-tooltip]:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* responsive changes */
+@media (max-width: 768px) {
+    abbr[data-tooltip]::before {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+        max-width: 200px;
+        white-space: normal;
+    }
+}

@@ -1,18 +1,22 @@
 /**
- * @license Copyright (c) 2003-2022, CKSource Holding sp. z o.o. All rights reserved.
- * For licensing, see LICENSE.md.
+ * Based on CKEditor 5 Tutorial Examples - Abbreviation Plugin
+ * Original source: https://github.com/ckeditor/ckeditor5-tutorials-examples/blob/main/abbreviation-plugin/part-3/abbreviation/abbreviationview.js
+ * License: https://github.com/ckeditor/ckeditor5-tutorials-examples/blob/main/LICENSE.md
+ *
+ * Modifications for TYPO3 Extension by Michael Staatz
+ * 2025
  */
 
 import {
   ButtonView,
+  createLabeledInputText,
   FocusCycler,
   LabeledFieldView,
-  createLabeledInputText,
   submitHandler,
   View
 } from '@ckeditor/ckeditor5-ui';
-import { icons } from '@ckeditor/ckeditor5-core';
-import { FocusTracker, KeystrokeHandler } from '@ckeditor/ckeditor5-utils';
+import {IconCancel, IconCheck} from '@ckeditor/ckeditor5-icons';
+import {FocusTracker, KeystrokeHandler} from '@ckeditor/ckeditor5-utils';
 
 export default class FormView extends View {
   constructor(locale) {
@@ -20,19 +24,11 @@ export default class FormView extends View {
 
     this.focusTracker = new FocusTracker();
     this.keystrokes = new KeystrokeHandler();
-
     this.abbrInputView = this._createInput('Add abbreviation');
     this.titleInputView = this._createInput('Add title');
-
-    this.saveButtonView = this._createButton('Save', icons.check, 'ck-button-save');
-
-    // Submit type of the button will trigger the submit event on entire form when clicked
-    // (see submitHandler() in render() below).
+    this.saveButtonView = this._createButton('Save', IconCheck, 'ck-button-save');
     this.saveButtonView.type = 'submit';
-
-    this.cancelButtonView = this._createButton('Cancel', icons.cancel, 'ck-button-cancel');
-
-    // Delegate ButtonView#execute to FormView#cancel.
+    this.cancelButtonView = this._createButton('Cancel', IconCancel, 'ck-button-cancel');
     this.cancelButtonView.delegate('execute').to(this, 'cancel');
 
     this.childViews = this.createCollection([
@@ -47,10 +43,7 @@ export default class FormView extends View {
       focusTracker: this.focusTracker,
       keystrokeHandler: this.keystrokes,
       actions: {
-        // Navigate form fields backwards using the Shift + Tab keystroke.
         focusPrevious: 'shift + tab',
-
-        // Navigate form fields forwards using the Tab key.
         focusNext: 'tab'
       }
     });
@@ -73,11 +66,9 @@ export default class FormView extends View {
     });
 
     this.childViews._items.forEach(view => {
-      // Register the view in the focus tracker.
       this.focusTracker.add(view.element);
     });
 
-    // Start listening for the keystrokes coming from #element.
     this.keystrokes.listenTo(this.element);
   }
 
@@ -89,12 +80,9 @@ export default class FormView extends View {
   }
 
   focus() {
-    // If the abbreviation text field is enabled, focus it straight away to allow the user to type.
     if (this.abbrInputView.isEnabled) {
       this.abbrInputView.focus();
-    }
-    // Focus the abbreviation title field if the former is disabled.
-    else {
+    } else {
       this.titleInputView.focus();
     }
   }

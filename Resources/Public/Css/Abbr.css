@@ -22,3 +22,8 @@
 .ck.ck-abbr-form .ck-button:nth-of-type(2) {
     grid-area: 3 / 2 / 4 / 3;
 }
+
+abbr[data-tooltip] {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+}

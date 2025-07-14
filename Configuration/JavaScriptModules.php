@@ -8,9 +8,8 @@ return [
         'backend.form',
     ],
     'imports' => [
-        // recursive definiton, all *.js files in this folder are import-mapped
+        // recursive definition, all *.js files in this folder are import-mapped
         // trailing slash is required per importmap-specification
         '@mista/ckeditor5_abbreviation/' => 'EXT:ckeditor5_abbreviation/Resources/Public/JavaScript/',
-        '@mista/ckeditor5_tooltip/' => 'EXT:ckeditor5_abbreviation/Resources/Public/JavaScript/',
     ],
 ];

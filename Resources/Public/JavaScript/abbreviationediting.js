@@ -1,9 +1,13 @@
 /**
- * @license Copyright (c) 2003-2022, CKSource Holding sp. z o.o. All rights reserved.
- * For licensing, see LICENSE.md.
+ * Based on CKEditor 5 Tutorial Examples - Abbreviation Plugin
+ * Original source: https://github.com/ckeditor/ckeditor5-tutorials-examples/blob/main/abbreviation-plugin/part-3/abbreviation/abbreviation.js
+ * License: https://github.com/ckeditor/ckeditor5-tutorials-examples/blob/main/LICENSE.md
+ *
+ * Modifications for TYPO3 Extension by Michael Staatz
+ * 2025
  */
 
-import { Plugin } from '@ckeditor/ckeditor5-core';
+import {Plugin} from '@ckeditor/ckeditor5-core';
 import AbbreviationCommand from './abbreviationcommand.js';
 
 export default class AbbreviationEditing extends Plugin {
@@ -11,15 +15,12 @@ export default class AbbreviationEditing extends Plugin {
     this._defineSchema();
     this._defineConverters();
 
-    this.editor.commands.add(
-      'addAbbreviation', new AbbreviationCommand(this.editor)
-    );
+    this.editor.commands.add('addAbbreviation', new AbbreviationCommand(this.editor));
   }
 
   _defineSchema() {
     const schema = this.editor.model.schema;
 
-    // Extend the text node's schema to accept the abbreviation attribute.
     schema.extend('$text', {
       allowAttributes: ['abbreviation']
     });
@@ -28,33 +29,18 @@ export default class AbbreviationEditing extends Plugin {
   _defineConverters() {
     const conversion = this.editor.conversion;
 
-    // Conversion from a model attribute to a view element
     conversion.for('downcast').attributeToElement({
-      model: 'abbreviation',
-
-      // Callback function provides access to the model attribute value
-      // and the DowncastWriter
-      view: (modelAttributeValue, conversionApi) => {
-        const {writer} = conversionApi;
-        return writer.createAttributeElement('abbr', {
-          title: modelAttributeValue
-        });
+      model: 'abbreviation', view: (modelAttributeValue, {writer}) => {
+        return writer.createAttributeElement('abbr', {'data-tooltip': modelAttributeValue}, {priority: 5});
       }
     });
 
-    // Conversion from a view element to a model attribute
     conversion.for('upcast').elementToAttribute({
       view: {
-        name: 'abbr',
-        attributes: ['title']
-      },
-      model: {
-        key: 'abbreviation',
-
-        // Callback function provides access to the view element
-        value: viewElement => {
-          const title = viewElement.getAttribute('title');
-          return title;
+        name: 'abbr', attributes: ['data-tooltip']
+      }, model: {
+        key: 'abbreviation', value: viewElement => {
+          return viewElement.getAttribute('data-tooltip');
         }
       }
     });

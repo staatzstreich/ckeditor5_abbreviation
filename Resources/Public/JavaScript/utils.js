@@ -1,6 +1,10 @@
 /**
- * @license Copyright (c) 2003-2024, CKSource Holding sp. z o.o. All rights reserved.
- * For licensing, see LICENSE.md.
+ * Based on CKEditor 5 Tutorial Examples - Abbreviation Plugin
+ * Original source: https://github.com/ckeditor/ckeditor5-tutorials-examples/blob/main/abbreviation-plugin/part-3/abbreviation/util.js
+ * License: https://github.com/ckeditor/ckeditor5-tutorials-examples/blob/main/LICENSE.md
+ *
+ * Modifications for TYPO3 Extension by Michael Staatz
+ * 2025
  */
 
 // A helper function that retrieves and concatenates all text within the model range.

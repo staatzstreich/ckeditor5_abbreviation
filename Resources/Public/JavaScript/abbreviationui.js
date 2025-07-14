@@ -1,10 +1,14 @@
 /**
- * @license Copyright (c) 2003-2024, CKSource Holding sp. z o.o. All rights reserved.
- * For licensing, see LICENSE.md.
+ * Based on CKEditor 5 Tutorial Examples - Abbreviation Plugin
+ * Original source: https://github.com/ckeditor/ckeditor5-tutorials-examples/blob/main/abbreviation-plugin/part-3/abbreviation/abbreviation.js
+ * License: https://github.com/ckeditor/ckeditor5-tutorials-examples/blob/main/LICENSE.md
+ *
+ * Modifications for TYPO3 Extension by Michael Staatz
+ * 2025
  */
 
-import { Plugin } from '@ckeditor/ckeditor5-core';
-import { ButtonView, ContextualBalloon, clickOutsideHandler } from '@ckeditor/ckeditor5-ui';
+import {Plugin} from '@ckeditor/ckeditor5-core';
+import {ButtonView, clickOutsideHandler, ContextualBalloon} from '@ckeditor/ckeditor5-ui';
 import FormView from './abbreviationview.js';
 import getRangeText from './utils.js';
 
@@ -43,25 +47,20 @@ export default class AbbreviationUI extends Plugin {
     const editor = this.editor;
     const formView = new FormView(editor.locale);
 
-    // Execute the command after clicking the "Save" button.
     this.listenTo(formView, 'submit', () => {
-      // Grab values from the abbreviation and title input fields.
       const value = {
         abbr: formView.abbrInputView.fieldView.element.value,
         title: formView.titleInputView.fieldView.element.value
       };
       editor.execute('addAbbreviation', value);
 
-      // Hide the form view after submit.
       this._hideUI();
     });
 
-    // Hide the form view after clicking the "Cancel" button.
     this.listenTo(formView, 'cancel', () => {
       this._hideUI();
     });
 
-    // Hide the form view when clicking outside the balloon.
     clickOutsideHandler({
       emitter: formView,
       activator: () => this._balloon.visibleView === formView,
@@ -88,20 +87,17 @@ export default class AbbreviationUI extends Plugin {
       position: this._getBalloonPositionData()
     });
 
-    // Disable the input when the selection is not collapsed.
     this.formView.abbrInputView.isEnabled = selection.getFirstRange().isCollapsed;
 
-    // Fill the form using the state (value) of the command.
     if (commandValue) {
       this.formView.abbrInputView.fieldView.value = commandValue.abbr;
       this.formView.titleInputView.fieldView.value = commandValue.title;
     }
+
       // If the command has no value, put the currently selected text (not collapsed)
     // in the first field and empty the second in that case.
     else {
-      const selectedText = getRangeText(selection.getFirstRange());
-
-      this.formView.abbrInputView.fieldView.value = selectedText;
+      this.formView.abbrInputView.fieldView.value = getRangeText(selection.getFirstRange());
       this.formView.titleInputView.fieldView.value = '';
     }
 
@@ -113,11 +109,7 @@ export default class AbbreviationUI extends Plugin {
     this.formView.abbrInputView.fieldView.value = '';
     this.formView.titleInputView.fieldView.value = '';
     this.formView.element.reset();
-
     this._balloon.remove(this.formView);
-
-    // Focus the editing view after inserting the abbreviation so the user can start typing the content
-    // right away and keep the editor focused.
     this.editor.editing.view.focus();
   }
 
