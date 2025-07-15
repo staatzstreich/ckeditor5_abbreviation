@@ -1,5 +1,5 @@
 {
-	"name": "mista/ckeditor5-abbreviation",
+	"name": "michaelstaatz/ckeditor5-abbreviation",
 	"type": "typo3-cms-extension",
 	"description": "Add Abbreviations information through the ckeditor",
 	"authors": [
