@@ -4,7 +4,7 @@ This extension ships a simple plugin for the ckeditor to allow editors setting a
 
 ## Installation
 
-Use `ddev composer req mista/ckeditor5-abbreviation:13.4` or download the extension from TER.
+Use `ddev composer req michaelstaatz/ckeditor5-abbreviation:13.4` or download the extension from TER.
 
 ## Usage
 
