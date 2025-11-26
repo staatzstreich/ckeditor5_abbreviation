@@ -12,7 +12,7 @@
 		"GPL-2.0-or-later"
 	],
 	"require": {
-		"typo3/cms-rte-ckeditor": "^13.4"
+		"typo3/cms-rte-ckeditor": "^14.0 || ^13.4"
 	},
 	"extra": {
 		"typo3/cms": {
