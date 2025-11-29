@@ -14,6 +14,11 @@
 	"require": {
 		"typo3/cms-rte-ckeditor": "^14.0 || ^13.4"
 	},
+	"autoload": {
+		"psr-4": {
+			"Michaelstaatz\\Ckeditor5Abbreviation\\": "Classes/"
+		}
+	},
 	"extra": {
 		"typo3/cms": {
 			"extension-key": "ckeditor5_abbreviation"

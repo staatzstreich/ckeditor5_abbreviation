@@ -40,6 +40,13 @@ editor:
 page.includeCSS.abbreviation-tooltip = EXT:ckeditor5_abbreviation/Resources/Public/Css/AbbreviationTooltip.css
 ```
 
+## Optional
+There is an UpgradeWizard as part of this extension. Purpose is to replace all
+```<abbr title="```
+with
+```<abbr data-tooltip="```
+
+
 ## Credits
 
 This extension was created by Michael Staatz with ♥ and is inspired by the extension [rte_ckeditor_abbr](https://extensions.typo3.org/extension/rte_ckeditor_abbr)
