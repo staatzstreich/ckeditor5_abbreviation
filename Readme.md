@@ -20,7 +20,7 @@ editor:
     htmlSupport:
       allow:
         - { name: 'abbr', attributes: true, classes: true, styles: true }
-    contentCss:
+    contentsCss:
       - "EXT:ckeditor5_abbreviation/Resources/Public/Css/Abbr.css"
 ```
 
